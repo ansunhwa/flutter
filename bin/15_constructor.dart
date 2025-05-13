@@ -23,7 +23,7 @@ class Idol {
 //생성자
 Idol(String name, List<String> members)
     : this.name = name,
-this.members = members;
+      this.members = members;
 */
 
 //위의 생성자를 간단하게

@@ -20,6 +20,7 @@ void main() {
   num = null;
   print(num);
 
+  //초기값
   num ??= 5;  //num에 null이들어있으면 5를, 값이 들어있으면 원래 값을
   print('num = $num');
 

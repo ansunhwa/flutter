@@ -42,5 +42,7 @@ int subtract(int x, int y , int z) => x-y-z;
 
 /*int calulate(int x, int y, int z, Operation op){
   return op(x,y,z);
-}*/
+} 이 내용을 화살표 함수로 바꾼 것 */
 int calulate(int x, int y, int z, Operation op) => op(x,y,z);
+
+
