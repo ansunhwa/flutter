@@ -1,4 +1,5 @@
 /*
+//0만 리턴
 void main() {
   //print(calculate(3));
 }
@@ -10,8 +11,8 @@ calculate(int num) {
 }
 */
 
-//stream - async*  return -> yield
-//
+//stream -> async*  return -> yield
+//0만 리턴하고 종료되는 것을 막으려면
 /*
 void main() {
   calculate(2).listen((val){
@@ -66,7 +67,7 @@ calculate(int num) async*{
 }
 */
 
-//1r개가 끝나고 2번째 것 실행되게
+//1개가 끝나고 2번째 것 실행되게
 void main() {
 
   playAllStream().listen((val){

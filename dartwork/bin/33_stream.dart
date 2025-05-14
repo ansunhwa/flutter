@@ -30,7 +30,7 @@ void main() {
   });
 
   final streamListener2 = stream.listen((val) {
-    print('Listener1 : $val');
+    print('Listener2 : $val');
     print('---------------------');
   });
 

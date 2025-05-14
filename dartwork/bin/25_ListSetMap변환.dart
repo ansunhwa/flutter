@@ -13,8 +13,8 @@ void main() {
   print(blackPinkMap.keys);
 
   // List로 변형 (Map -> List)
-  print(blackPinkMap.keys.toList()); // 0,1,2,3
-  print(blackPinkMap.values.toList());
+  print(blackPinkMap.keys.toList());   // 키만 리스트로
+  print(blackPinkMap.values.toList()); // 값만 리스트로
 
   //List -> set
   Set blackPinkSet = blackPink.toSet();
