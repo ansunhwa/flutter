@@ -19,11 +19,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var name = ['홍길동', '더조은', '빛나리'];
 
-  addName(inputName) {
-    setState(() {
-      name.add(inputName);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +29,7 @@ class _MyAppState extends State<MyApp> {
             showDialog(
                 context: context,
                 builder: (context) {
-                  return CustomDialog(addName : addName);
+                  return CustomDialog();
                 }
             );
           }
@@ -52,7 +47,7 @@ class _MyAppState extends State<MyApp> {
             title: Text(name[i]),
           );
         },
-        itemCount: name.length,
+        itemCount: 3,
       ),
       bottomNavigationBar: CustomBottom(),
     );
@@ -60,9 +55,8 @@ class _MyAppState extends State<MyApp> {
 }
 
 class CustomDialog extends StatelessWidget {
-  CustomDialog({super.key, this.addName});
+  CustomDialog({super.key});
   var inputData = '';
-  final addName;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +69,7 @@ class CustomDialog extends StatelessWidget {
             TextField(onChanged: (text){ inputData = text; },),
             TextButton(
                 onPressed: (){
-                  addName(inputData);
+                  print(inputData);
 
                   //Navigator.pop(context);
                 },
