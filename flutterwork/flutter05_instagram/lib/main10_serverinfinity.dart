@@ -4,25 +4,18 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/rendering.dart';  //스크롤에 관련된 함수 모음
 /*
-    Navigator : 화면간의 이동을 관리하는 스택구조의 네비게이션 시스템
-     - Navigator.push(context, route) : 새로운 화면을 스택위에 추가
-     - Navigator.pop(context) : 현재 화면을 스택에서 제거
-     - Navigator.pushNamed(context, routeName) : 이름으로 등록된 경로로 이동
-     - Navigator.pushReplacement(context, route) : 현재 화면을 새화면으로 교체
-     - Navigator.pupUntil(context, predicate) : 특정 조건을 만족할 대까지 뒤로 감(삭제)
+  * 무한스크롤
+      스크롤이 바닥에 닿으면 데이터를 얻어와서 보여주기
+    *
+    1. import하기
+    2. 스크롤의 상태를 파악하기 위해 Home을 stateful로 변경
  */
 
 void main() {   // 원하는 감싸는게 안뜨면 widget으로 감싸고 바꿔주면 됨
   runApp(
       MaterialApp(
         theme: theme,
-          initialRoute: '/',
-          routes: {
-          '/' : (context) => MyApp(),
-            '/detail' : (context) => upload(),
-            '/member' : (context) => Text('멤버페이지')
-          },
-          //home: const MyApp()
+          home: const MyApp()
       )
   );
 } 
@@ -64,7 +57,7 @@ class _MyAppState extends State<MyApp> {
 
   addData(item) {  //값 하나 추가해주는 함수
     setState(() {
-      feedItems.addAll(item);
+      feedItems.add(item);
     });
   }
 
@@ -73,9 +66,7 @@ class _MyAppState extends State<MyApp> {
     return Scaffold(
       appBar: AppBar(
         title: Text('instagram'),
-        actions: [IconButton(onPressed: (){
-          Navigator.pushNamed(context, '/upload');
-        }, icon: Icon(Icons.add))],
+        actions: [IconButton(onPressed: (){}, icon: Icon(Icons.add))],
       ),
       //future : feedItems -> future 객체를 넣는다. Future는 함수
       body: [homepage(feedItems: feedItems, addData:addData), Text('shop page')][tab],
@@ -173,24 +164,4 @@ class _homepageState extends State<homepage> {
    }
   }
 }
-
-class upload extends StatelessWidget {
-  const upload({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          Text('이미지업로드'),
-          IconButton(onPressed: (){
-            Navigator.pop(context); //현재 창 닫기
-          }, icon: Icon(Icons.favorite))
-        ],
-      )
-    );
-  }
-}
-
 

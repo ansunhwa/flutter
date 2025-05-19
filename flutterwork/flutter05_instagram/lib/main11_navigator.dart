@@ -16,13 +16,7 @@ void main() {   // 원하는 감싸는게 안뜨면 widget으로 감싸고 바�
   runApp(
       MaterialApp(
         theme: theme,
-          initialRoute: '/',
-          routes: {
-          '/' : (context) => MyApp(),
-            '/detail' : (context) => upload(),
-            '/member' : (context) => Text('멤버페이지')
-          },
-          //home: const MyApp()
+          home: const MyApp()
       )
   );
 } 
@@ -74,7 +68,8 @@ class _MyAppState extends State<MyApp> {
       appBar: AppBar(
         title: Text('instagram'),
         actions: [IconButton(onPressed: (){
-          Navigator.pushNamed(context, '/upload');
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => upload()));
         }, icon: Icon(Icons.add))],
       ),
       //future : feedItems -> future 객체를 넣는다. Future는 함수
