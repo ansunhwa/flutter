@@ -209,27 +209,7 @@ class _HomeState extends State<Home> {
                           onTap: (){
                               Navigator.push(context,
                                 // MaterialPageRoute(builder: (context) => Profile())  // 깜빡!
-                                //CupertinoPageRoute(builder: (context) => Profile())  //슬라이드
-
-                                 /*PageRouteBuilder( //fadein
-                                   pageBuilder: (context, a1, a2) =>
-                                     FadeTransition(opacity: a1, child: Profile(),
-                                 ),transitionDuration : Duration(microseconds: 1000),
-                                 )
-                                     //a1 : 0~1사이의 값 -> 새페이지 전환의 진행정도
-                                     //a2 : 0~1사이의 값 -> 기존페이지 전환 진행정도*/
-
-                                //slide 애니메이션
-                                PageRouteBuilder(
-                                  pageBuilder: (context, a1, a2) => Profile(),
-                                    transitionsBuilder: (context, a1, a2, child) =>
-                                        SlideTransition(position: Tween(
-                                          begin: Offset(0.0, -1.0),
-                                          end: Offset(0.0, 0.0)
-                                        ).animate(a1),
-                                          child: child,
-                                        ),
-                                )
+                                CupertinoPageRoute(builder: (context) => Profile())  //슬라이드
                               );
                           },
                         ),

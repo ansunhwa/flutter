@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter05_instagram/style.dart';
 import 'package:http/http.dart' as http;
@@ -10,16 +9,10 @@ import 'dart:io';
 
 import 'package:intl/intl.dart';
 /*
-    이름을 클릭하면 profile 창 띄우기
-      - GestureDetector() : 제스처를 감지할 수 있도록 도와주는 위젯
-        속성
-        -----------------------------------------------
-        onTap 한번클릭하면
-        onDoubleTap 더블클릭하면
-        onLongPress 길게 누르면
-        onPauUpdate 드래그 위치감지
-        onHorizontalDragStart 가로드래그
-        onVerticalDragStart 세로드래그
+  폰에 저장된 사진 가져오기
+  외부라이브러리 image_picker: ^1.1.2
+  import해주기
+  iOS는 권한설정
  */
 
 void main() {
@@ -204,37 +197,8 @@ class _HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('좋아요  ${widget.feedItems[i]['likes']}'),
-                        GestureDetector(
-                            child: Text('글쓴이  ${widget.feedItems[i]['user']}'),
-                          onTap: (){
-                              Navigator.push(context,
-                                // MaterialPageRoute(builder: (context) => Profile())  // 깜빡!
-                                //CupertinoPageRoute(builder: (context) => Profile())  //슬라이드
-
-                                 /*PageRouteBuilder( //fadein
-                                   pageBuilder: (context, a1, a2) =>
-                                     FadeTransition(opacity: a1, child: Profile(),
-                                 ),transitionDuration : Duration(microseconds: 1000),
-                                 )
-                                     //a1 : 0~1사이의 값 -> 새페이지 전환의 진행정도
-                                     //a2 : 0~1사이의 값 -> 기존페이지 전환 진행정도*/
-
-                                //slide 애니메이션
-                                PageRouteBuilder(
-                                  pageBuilder: (context, a1, a2) => Profile(),
-                                    transitionsBuilder: (context, a1, a2, child) =>
-                                        SlideTransition(position: Tween(
-                                          begin: Offset(0.0, -1.0),
-                                          end: Offset(0.0, 0.0)
-                                        ).animate(a1),
-                                          child: child,
-                                        ),
-                                )
-                              );
-                          },
-                        ),
-                        Text('내용  ${widget.feedItems[i]['content']}'),
-                        Text('날짜 ${widget.feedItems[i]['date']}')
+                        Text('글쓴이  ${widget.feedItems[i]['user']}'),
+                        Text('내용  ${widget.feedItems[i]['content']}')
                       ],
                     )
                 ),
@@ -247,19 +211,6 @@ class _HomeState extends State<Home> {
     }
   }
 }
-
-class Profile extends StatelessWidget {
-  const Profile({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Text('프로필페이지'),
-    );
-  }
-}
-
 
 class Upload extends StatelessWidget {
   const Upload({super.key, this.userImage, this.setUserContent, this.addMyData});
@@ -299,4 +250,3 @@ class Upload extends StatelessWidget {
     );
   }
 }
-

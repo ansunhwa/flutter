@@ -69,7 +69,8 @@ class _MyAppState extends State<MyApp> {
         title: Text('instagram'),
         actions: [IconButton(onPressed: (){
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => upload()));
+              context,    //부모의 정보
+              MaterialPageRoute(builder: (context) => upload()));  //올려줄 창
         }, icon: Icon(Icons.add))],
       ),
       //future : feedItems -> future 객체를 넣는다. Future는 함수

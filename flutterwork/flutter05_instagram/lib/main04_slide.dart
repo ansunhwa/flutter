@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter05_instagram/style.dart';
 /*
   * 슬라이드
+  * PageView() 사용
 
  */
 
