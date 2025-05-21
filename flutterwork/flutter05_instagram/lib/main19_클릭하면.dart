@@ -4,33 +4,30 @@ import 'package:flutter05_instagram/style.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/rendering.dart';
-import 'package:provider/provider.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 import 'package:intl/intl.dart';
 /*
-    > 부모가 자식에게 넘겨줘야 하는 값이 많다던지, 자식이 많아서 어러번에 걸쳐서 넘겨주려면 귀찮음
-      Provider : 전송없이 모든 위젯에 state를 가져다 쓸 수 잇게 만든 패키지
-       - state를 보관하는 store가 필요함 : class로 만들어서 모든 state를 넣어줌
+    이름을 클릭하면 profile 창 띄우기
+      - GestureDetector() : 제스처를 감지할 수 있도록 도와주는 위젯
+        속성
+        -----------------------------------------------
+        onTap 한번클릭하면
+        onDoubleTap 더블클릭하면
+        onLongPress 길게 누르면
+        onPauUpdate 드래그 위치감지
+        onHorizontalDragStart 가로드래그
+        onVerticalDragStart 세로드래그
  */
 
 void main() {
-  runApp(  // 한개만 사용할 때
-      ChangeNotifierProvider(
-        create: (context) => Store1(),  //하위자식들은 store1의내용을 사용할 수 있음
-        child: MaterialApp(
-          theme: theme,
-          home: const MyApp(),
-        ),
+  runApp(
+      MaterialApp(
+        theme: theme,
+        home: const MyApp(),
       )
-   /* // 두개 이상 사용할 때
-   MultiProvider(providers: [ChangeNotifierProvider(create: (context) => Store1()),
-                              ChangeNotifierProvider(create: (context) => Store2())],
-    child: MaterialApp(
-      theme: ,
-    ),)*/
   );
 }
 
@@ -104,6 +101,8 @@ class _MyAppState extends State<MyApp> {
               onPressed: () async{
                 var picker = ImagePicker();
                 var image = await picker.pickImage(source: ImageSource.gallery);
+                // ImageSource.camera  -> 카메라로 직접 찍음
+                // picker.pickMultiImage() -> 이미지 여러개 선택. 리스트로 들어옴
                 if(image != null) {
                   userImage = File(image.path);
                 }
@@ -209,6 +208,17 @@ class _HomeState extends State<Home> {
                             child: Text('글쓴이  ${widget.feedItems[i]['user']}'),
                           onTap: (){
                               Navigator.push(context,
+                                // MaterialPageRoute(builder: (context) => Profile())  // 깜빡!
+                                //CupertinoPageRoute(builder: (context) => Profile())  //슬라이드
+
+                                 /*PageRouteBuilder( //fadein
+                                   pageBuilder: (context, a1, a2) =>
+                                     FadeTransition(opacity: a1, child: Profile(),
+                                 ),transitionDuration : Duration(microseconds: 1000),
+                                 )
+                                     //a1 : 0~1사이의 값 -> 새페이지 전환의 진행정도
+                                     //a2 : 0~1사이의 값 -> 기존페이지 전환 진행정도*/
+
                                 //slide 애니메이션
                                 PageRouteBuilder(
                                   pageBuilder: (context, a1, a2) => Profile(),
@@ -238,30 +248,14 @@ class _HomeState extends State<Home> {
   }
 }
 
-//store 클래스 만들기
-class Store1 extends ChangeNotifier {
-  var name = 'john lee';
-  
-  changeName() {
-    name = 'john park';
-    notifyListeners(); //자기가 알아서 재 랜더링 해줌(setState가 아님)
-  }
-}
-
-
-
 class Profile extends StatelessWidget {
   const Profile({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.watch<Store1>().name),  //.watch() : state를 출력할 때 사용
-      ),
-      body: ElevatedButton(onPressed: (){
-        context.read<Store1>().changeName();   //.read() : 함수를 사용할 때
-      }, child: Text('이름 바꾸기') ),
+      appBar: AppBar(),
+      body: Text('프로필페이지'),
     );
   }
 }
