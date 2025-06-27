@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+
 /*
   * ThemeData() : 스타일을 모아놓음
     : 파일에서 사용하거나 별도의 파일로 만들어서 사용
  */
 
 void main() {   // 원하는 감싸는게 안뜨면 widget으로 감싸고 바꿔주면 됨
+
   runApp(
       MaterialApp(
           theme: ThemeData(// 스타일 넣어주면 됨

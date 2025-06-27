@@ -10,13 +10,21 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 import 'package:intl/intl.dart';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'Shop.dart';
+import 'firebase_options.dart';
 /*
     > 부모가 자식에게 넘겨줘야 하는 값이 많다던지, 자식이 많아서 어러번에 걸쳐서 넘겨주려면 귀찮음
       Provider : 전송없이 모든 위젯에 state를 가져다 쓸 수 잇게 만든 패키지
        - state를 보관하는 store가 필요함 : class로 만들어서 모든 state를 넣어줌
  */
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(  // 한개만 사용할 때
       ChangeNotifierProvider(
         create: (context) => Store1(),  //하위자식들은 store1의내용을 사용할 수 있음
@@ -123,7 +131,7 @@ class _MyAppState extends State<MyApp> {
           )
         ],
       ),
-      body: [Home(feedItems : feedItems, addData : addData), Text('Shop Page')][tab],
+      body: [Home(feedItems : feedItems, addData : addData), Shop()][tab],
       bottomNavigationBar: BottomNavigationBar(
           showSelectedLabels: false,
           showUnselectedLabels: false,
